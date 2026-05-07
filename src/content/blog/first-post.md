@@ -1,7 +1,7 @@
 ---
-title: 'First post'
+title: '¿Qué es una cyberdeck?'
 description: 'Lorem ipsum dolor sit amet'
-pubDate: 'Jul 08 2022'
+pubDate: 'Mayo 7, 2026'
 heroImage: '../../assets/blog-placeholder-3.jpg'
 ---
 
