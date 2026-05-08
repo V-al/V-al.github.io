@@ -1,5 +1,5 @@
 ---
-title: '¿Qué es una cyberdeck?'
+title: 'In nomine'
 description: 'Lorem ipsum dolor sit amet'
 pubDate: 'Mayo 7, 2026'
 heroImage: '../../assets/blog-placeholder-3.jpg'
