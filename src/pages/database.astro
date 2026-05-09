@@ -1,0 +1,176 @@
+---
+import Layout from "../layouts/Page.astro";
+import { Image } from "astro:assets";
+
+import imgGits from "../assets/ghostshell.webp";
+// Obras
+const obras = [
+    {
+        titulo: "Akira",
+        tipo: "Película",
+        date: "1988",
+        img: "https://m.media-amazon.com/images/I/61vhScYauTL._AC_SL1500_.jpg", // Reemplaza con tus rutas
+        descripcion: "¿Poderes en Neo-Tokyo?",
+    },
+    {
+        titulo: "Neuromante",
+        tipo: "Libro",
+        date: "1986",
+        img: "https://m.media-amazon.com/images/I/811x3C8CHVL._SL1379_.jpg",
+        descripcion: "La obra Magna del cyberpunk.",
+    },
+    {
+        titulo: "Cyberpunk 2077",
+        tipo: "Videojuego",
+        date: "2020",
+        img: "https://store-images.s-microsoft.com/image/apps.47379.63407868131364914.bcaa868c-407e-42c2-baeb-48a3c9f29b54.89bb995b-b066-4a53-9fe4-0260ce07e894",
+        descripcion: "No hay finales felices en Night City.",
+    },
+    {
+        titulo: "Ghost in the Shell",
+        tipo: "Película",
+        date: "1995",
+        img: imgGits.src,
+        descripcion: "¿Conciencia o programa?",
+    },
+
+    {
+        titulo: "Blade Runner",
+        tipo: "Película",
+        date: "1982",
+        img: "https://m.media-amazon.com/images/M/MV5BOWQ4YTBmNTQtMDYxMC00NGFjLTkwOGQtNzdhNmY1Nzc1MzUxXkEyXkFqcGc@._V1_.jpg",
+        descripcion: "Más humano que los humanos.",
+    },
+    {
+        titulo: "Blade Runner 2049",
+        tipo: "Película",
+        date: "2017",
+        img: "https://m.media-amazon.com/images/M/MV5BNzA1Njg4NzYxOV5BMl5BanBnXkFtZTgwODk5NjU3MzI@._V1_FMjpg_UX1000_.jpg",
+        descripcion: "You look like a good Joe.",
+    },
+    {
+        titulo: "Cyberpunk: Edgerunners",
+        tipo: "Serie",
+        date: "2022",
+        img: "https://sm.ign.com/t/ign_latam/cover/c/cyberpunk-/cyberpunk-edgerunners_vwtk.1280.jpg",
+        descripcion: "Lo siento, no podemos ir a la luna juntos.",
+    },
+];
+// Ordenar antes de mapear
+const obrasOrdenadas = obras.sort(
+    (a, b) => parseInt(a.date) - parseInt(b.date),
+);
+---
+
+<Layout title="DATABASE" description="Obras cyberpunk">
+    <p>
+        Aquí encontrarás diferentes obras cyberpunk. <br />
+        Tal vez música, series, películas, etc.
+    </p>
+
+    <div class="galeria">
+        {
+            obrasOrdenadas.map((obra) => (
+                <article class="card">
+                    <img src={obra.img} alt={obra.titulo} />
+                    <div class="info">
+                        <div class="meta">
+                            <span>{obra.tipo}</span>
+                            <span class="divider">|</span>
+                            <span class="year">{obra.date}</span>
+                        </div>
+                        <h3>{obra.titulo}</h3>
+                        <p>{obra.descripcion}</p>
+                    </div>
+                </article>
+            ))
+        }
+    </div>
+</Layout>
+
+<style>
+    .galeria {
+        display: grid;
+        /* Crea columnas automáticas de mínimo 250px */
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 2rem;
+        padding: 20px 0;
+    }
+
+    .card {
+        background: #1a1a1a;
+        border: 1px solid #333;
+        border-radius: 8px;
+        overflow: hidden;
+        transition:
+            transform 0.3s ease,
+            border-color 0.3s ease;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        border-color: #00ff41; /* Verde neón muy cyberpunk */
+    }
+
+    .card img {
+        width: 100%;
+        height: 32rem;
+        object-fit: cover;
+        filter: contrast(150%);
+    }
+
+    .info {
+        padding: 1.5rem;
+    }
+
+    .info span {
+        font-size: 0.8rem;
+        color: #00ff41;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .info h3 {
+        margin: 0.5rem 0;
+        color: #fff;
+    }
+
+    .info p {
+        font-size: 0.9rem;
+        color: #ccc;
+    }
+    .meta {
+        display: flex;
+        align-items: center;
+        font-size: 0.75rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .year {
+        color: #888;
+        font-weight: bold;
+    }
+
+    .divider {
+        color: #444;
+        margin: 0 5px;
+    }
+
+    /* Opcional: Badge sobre la imagen */
+    .card {
+        position: relative;
+    }
+
+    .date-badge {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: rgba(0, 0, 0, 0.8);
+        color: #00ff41;
+        padding: 2px 8px;
+        font-size: 0.7rem;
+        border: 1px solid #00ff41;
+        border-radius: 4px;
+        z-index: 10;
+    }
+</style>
