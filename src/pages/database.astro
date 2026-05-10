@@ -15,7 +15,7 @@ const obras = [
     {
         titulo: "Neuromante",
         tipo: "Libro",
-        date: "1986",
+        date: "1984",
         img: "https://m.media-amazon.com/images/I/811x3C8CHVL._SL1379_.jpg",
         descripcion: "La obra Magna del cyberpunk.",
     },
@@ -52,8 +52,22 @@ const obras = [
         titulo: "Cyberpunk: Edgerunners",
         tipo: "Serie",
         date: "2022",
-        img: "https://sm.ign.com/t/ign_latam/cover/c/cyberpunk-/cyberpunk-edgerunners_vwtk.1280.jpg",
+        img: "https://moviepostermexico.com/cdn/shop/products/cyberpunk_edgerunners_xxlg_1024x1024@2x.jpg?v=1664234839",
         descripcion: "Lo siento, no podemos ir a la luna juntos.",
+    },
+    {
+        titulo: "Matrix",
+        tipo: "Película",
+        date: "1999",
+        img: "https://m.media-amazon.com/images/M/MV5BN2NmN2VhMTQtMDNiOS00NDlhLTliMjgtODE2ZTY0ODQyNDRhXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
+        descripcion: "Estamos en una simulación.",
+    },
+    {
+        titulo: "¿Sueñan los androides con ovejas eléctricas?",
+        tipo: "Libro",
+        date: "1968",
+        img: "https://m.media-amazon.com/images/I/91heWmnaDeL._SL1500_.jpg",
+        descripcion: "Estamos en una simulación.",
     },
 ];
 // Ordenar antes de mapear
@@ -65,25 +79,35 @@ const obrasOrdenadas = obras.sort(
 <Layout title="DATABASE" description="Obras cyberpunk">
     <p>
         Aquí encontrarás diferentes obras cyberpunk. <br />
-        Tal vez música, series, películas, etc.
+        Tal vez música, series, películas, etc. <br />
+        La voy a estar actualizando.
     </p>
 
     <div class="galeria">
         {
-            obrasOrdenadas.map((obra) => (
-                <article class="card">
-                    <img src={obra.img} alt={obra.titulo} />
-                    <div class="info">
-                        <div class="meta">
-                            <span>{obra.tipo}</span>
-                            <span class="divider">|</span>
-                            <span class="year">{obra.date}</span>
+            obras.map((obra) => {
+                const tipoClase = obra.tipo
+                    .toLowerCase()
+                    .normalize("NFD")
+                    .replace(/[\u0300-\u036f]/g, "");
+
+                return (
+                    <article class={`card ${tipoClase}`}>
+                        <div class="date-badge">{obra.date}</div>
+                        <img src={obra.img} alt={obra.titulo} />
+                        <div class="info">
+                            <div class="meta">
+                                <span class="tipo-texto">{obra.tipo}</span>
+                                <span class="divider">|</span>
+                                <span class="date-text">{obra.date}</span>{" "}
+                                {/* Esta es la fecha */}
+                            </div>
+                            <h3>{obra.titulo}</h3>
+                            <p>{obra.descripcion}</p>
                         </div>
-                        <h3>{obra.titulo}</h3>
-                        <p>{obra.descripcion}</p>
-                    </div>
-                </article>
-            ))
+                    </article>
+                );
+            })
         }
     </div>
 </Layout>
@@ -156,7 +180,6 @@ const obrasOrdenadas = obras.sort(
         margin: 0 5px;
     }
 
-    /* Opcional: Badge sobre la imagen */
     .card {
         position: relative;
     }
@@ -172,5 +195,47 @@ const obrasOrdenadas = obras.sort(
         border: 1px solid #00ff41;
         border-radius: 4px;
         z-index: 10;
+    }
+    /* Color para Peliculas */
+    .pelicula {
+        border-color: #ff0055;
+    }
+    .pelicula:hover {
+        box-shadow: 0 0 15px rgba(255, 0, 85, 0.4);
+    }
+    .pelicula .tipo-texto {
+        color: #ff0055;
+    }
+
+    /* Color para Libros */
+    .libro {
+        border-color: #00d2ff;
+    }
+    .libro:hover {
+        box-shadow: 0 0 15px rgba(0, 210, 255, 0.4);
+    }
+    .libro .tipo-texto {
+        color: #00d2ff;
+    }
+
+    /* Color para Series  */
+    .serie {
+        border-color: #ffcc00;
+    }
+    .serie:hover {
+        box-shadow: 0 0 15px rgba(255, 204, 0, 0.4);
+    }
+    .serie .tipo-texto {
+        color: #ffcc00;
+    }
+    /* Color para Videojuegos  */
+    .videojuego {
+        border-color: #00ff04;
+    }
+    .videojuego:hover {
+        box-shadow: 0 0 15px rgba(0, 255, 13, 0.4);
+    }
+    .videojuego .tipo-texto {
+        color: #22ff00;
     }
 </style>

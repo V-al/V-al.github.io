@@ -182,7 +182,7 @@ body::after {
 			transparent 0px,
 			transparent 2px,
 			rgba(0, 255, 240, 0.040) 2px,
-			rgba(0, 255, 240, 0.040) 3px);
+			rgba(0, 255, 238, 0.099) 3px);
 	pointer-events: none;
 	z-index: 9999;
 }
@@ -218,5 +218,11 @@ body::after {
 
 	100% {
 		transform: translate(0, 0);
+	}
+}
+
+@media (orientation: portrait) {
+	h1 {
+		font-size: 2.5rem;
 	}
 }
